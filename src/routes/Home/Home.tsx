@@ -1,5 +1,11 @@
+import { Header } from "../../components";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <section id="home">
+      <Header />
+    </section>
+  );
 };
 
 export default Home;
