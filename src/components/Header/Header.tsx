@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./Header.scss";
 import { useQuery } from "@tanstack/react-query";
 
@@ -7,12 +8,23 @@ const Header = () => {
     queryFn: () =>
       fetch("https://randomuser.me/api/?results=50").then((res) => res.json()),
   });
+  
+  const [usersList, setUsersList] = useState([]);
+  const [searchField, setSearchField] = useState("");
 
   if (isLoading) return "Loading...";
 
-  if (error) return "An error has occurred: ";
+  if (error) return `An error has occurred: ${error.message}`;
 
   const { results: users } = data;
+
+  if (data && usersList.length === 0) {
+    setUsersList(users);
+  }
+
+  const filteredUsers = usersList.filter(user =>
+    `${user.name.first} ${user.name.last}`.toLowerCase().includes(searchField.toLowerCase())
+  );
 
   return (
     <>
@@ -22,12 +34,14 @@ const Header = () => {
           type="text"
           placeholder="Search user..."
           className="header-search-bar"
+          value={searchField}
+          onChange={(e) => setSearchField(e.target.value)}
         />
         <div className="header-bar" />
       </header>
 
       <main>
-        {users.map((user , index ) => (
+        {filteredUsers.map((user, index) => (
           <li key={index}>
             <p>
               Name: {user.name.first} {user.name.last}
