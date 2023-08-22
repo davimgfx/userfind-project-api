@@ -1,0 +1,20 @@
+.loading-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  margin: 0 auto;
+  gap: 1.2rem;
+  div {
+    background: #811AC0;
+    border-radius: 30px;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.loading-bar {
+  width: 0;
+  height: 4px;
+  background-color: #3498db; /* Cor da barra de loading */
+}

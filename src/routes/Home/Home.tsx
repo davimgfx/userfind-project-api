@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Header, UserTable } from "../../components";
+import { Header, UserTable, TableLoading } from "../../components";
 import "./Home.scss";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const { isLoading, error, data } = useQuery(["randomUsers"], () =>
@@ -10,18 +11,14 @@ const Home = () => {
 
   const [searchField, setSearchField] = useState("");
 
-  if (isLoading) return <div>...Loading</div>;
-
-  if (error) return `An error has occurred: ${error.message}`;
-
-  const { results: users } = data;
-
-  console.log(users);
-
   const onSearchChange = (event) => {
     const searchValue = event.target.value.toLowerCase();
     setSearchField(searchValue);
   };
+
+  if (error) return `An error has occurred: ${error.message}`;
+
+  const users = data?.results || [];
 
   const filteredUsers = users.filter((user) =>
     `${user.name.first} ${user.name.last}`.toLowerCase().includes(searchField)
@@ -30,7 +27,19 @@ const Home = () => {
   return (
     <section id="home">
       <Header onChangeHandler={onSearchChange} />
-      <UserTable filteredUsers={filteredUsers} />
+      {isLoading ? (
+        <TableLoading />
+      ) : (
+        <>
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 1 }}>
+            <UserTable filteredUsers={filteredUsers} />
+          </motion.div>
+        </>
+      )}
     </section>
   );
 };
