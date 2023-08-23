@@ -1,9 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { UserInfos, Home } from "./routes"
-import App from './App.tsx'
-import './index.scss'
+import { UserInfos, Home } from "./routes";
+import { UserInfosProvider } from "./context/UserInfosContext.tsx";
+import App from "./App.tsx";
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
@@ -16,14 +17,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/:id",
-        element: <UserInfos />
-      }
+        element: <UserInfos />,
+      },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <UserInfosProvider>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </UserInfosProvider>
+);

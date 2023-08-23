@@ -1,0 +1,28 @@
+.user-about-options {
+  margin-top: 2rem;
+  display: flex;
+
+  .user-about-option {
+    padding: 1rem 4rem;
+    font-size: 1.5rem;
+    color: #d6d6d6;
+    cursor: pointer;
+    margin-bottom: 3rem;
+  }
+  .activity-option {
+    border-bottom: 3px solid #811ac0;
+    color: #ffffff;
+  }
+}
+
+.user-infos{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  h2{
+    font-size: 1.125rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+}

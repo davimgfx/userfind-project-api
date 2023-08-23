@@ -1,13 +1,18 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useContext, useState } from "react";
 import { Header, UserTable, TableLoading } from "../../components";
 import "./Home.scss";
 import { motion } from "framer-motion";
 
+import { UserInfosContext } from "../../context/UserInfosContext";
+
 const Home = () => {
-  const { isLoading, error, data } = useQuery(["randomUsers"], () =>
-    fetch("https://randomuser.me/api/?results=50").then((res) => res.json())
-  );
+  const userInfosContext = useContext(UserInfosContext);
+
+  if (!userInfosContext) {
+    return null;
+  }
+
+  const { isLoading, data } = userInfosContext;
 
   const [searchField, setSearchField] = useState("");
 
@@ -16,9 +21,7 @@ const Home = () => {
     setSearchField(searchValue);
   };
 
-  if (error) return `An error has occurred: ${error.message}`;
-
-  const users = data?.results || [];
+  const users = data || [];
 
   const filteredUsers = users.filter((user) =>
     `${user.name.first} ${user.name.last}`.toLowerCase().includes(searchField)
@@ -30,15 +33,13 @@ const Home = () => {
       {isLoading ? (
         <TableLoading />
       ) : (
-        <>
-          <motion.div
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -10, opacity: 0 }}
-            transition={{ duration: 1 }}>
-            <UserTable filteredUsers={filteredUsers} />
-          </motion.div>
-        </>
+        <motion.div
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -10, opacity: 0 }}
+          transition={{ duration: 1 }}>
+          <UserTable filteredUsers={filteredUsers} />
+        </motion.div>
       )}
     </section>
   );

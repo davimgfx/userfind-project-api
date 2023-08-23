@@ -14,4 +14,7 @@ export type UserTableInfos = {
   dob: {
     age: number;
   };
+  picture: {
+    large: string;
+  }
 };
