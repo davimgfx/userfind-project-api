@@ -15,14 +15,27 @@
   }
 }
 
-.user-infos{
+.user-infos {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  h2{
+  h2 {
     font-size: 1.125rem;
   }
-  p{
+  p {
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .user-about-options {
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 2rem;
+    justify-content: center;
+  }
+  .user-infos {
+    display: flex;
+    margin: 0 2rem;
   }
 }

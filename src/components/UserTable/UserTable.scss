@@ -45,6 +45,7 @@
 .navigation-buttons {
   display: flex;
   gap: 0.3rem;
+  margin-bottom: 2rem;
 
   .navigation-button {
     width: 5rem;
@@ -55,7 +56,56 @@
     font-weight: 400;
     cursor: pointer;
   }
-  .active{
+  .active {
     background-color: #811ac0;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .users-infos-table-title {
+    display: none;
+  }
+
+  .users-infos-table-body tr td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    border: 1px solid #212121;
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-align: center;
+    font-family: "Poppins", "Roboto";
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .users-infos-table-title {
+    display: none;
+  }
+
+  .users-infos-table-body tr td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    border: 1px solid #212121;
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-align: center;
+    font-family: "Poppins", "Roboto";
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navigation-buttons {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 2rem;
+
+    .navigation-button {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 }

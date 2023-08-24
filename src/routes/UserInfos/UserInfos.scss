@@ -34,3 +34,11 @@
     background-color: #2d2b2b;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .profile {
+    .button-home {
+      transform: translateX(0rem);
+    }
+  }
+}

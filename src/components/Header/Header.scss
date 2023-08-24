@@ -30,3 +30,11 @@
     background-color: #2D2B2B;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .header{
+    &-search-bar{
+      width: 80%;
+    }
+  }
+}
