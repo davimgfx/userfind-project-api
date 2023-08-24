@@ -16,7 +16,7 @@ const Home = () => {
   const { isLoading, error, data } = userInfosContext;
 
   if (error) {
-    alert(`Some error happend ${error.message}`);
+    alert(`Some error happend ${error}`);
   }
 
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>) => {

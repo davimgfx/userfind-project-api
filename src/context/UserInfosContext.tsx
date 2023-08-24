@@ -25,7 +25,7 @@ export const UserInfosProvider = ({ children }: UserInfosProviderProps) => {
         .then((data) => data.results), // 
   });
 
-  const contextValue: UserInfosContextValue = { isLoading, error, data };
+  const contextValue: UserInfosContextValue = { isLoading, error: error as string | null, data: data! };
 
   return (
     <UserInfosContext.Provider value={contextValue}>
