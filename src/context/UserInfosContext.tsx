@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext } from "react";
 import { UserTableInfos } from "../types/user";
+import { useQuery } from "@tanstack/react-query";
 
 type UserInfosContextValue = {
   isLoading: boolean;
@@ -11,30 +12,18 @@ type UserInfosProviderProps = {
   children: React.ReactNode;
 };
 
-export const UserInfosContext = createContext<
-  UserInfosContextValue | undefined
->(undefined);
+export const UserInfosContext = createContext<UserInfosContextValue | undefined>(
+  undefined
+);
 
 export const UserInfosProvider = ({ children }: UserInfosProviderProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<UserTableInfos[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://randomuser.me/api/?results=50");
-        const jsonData = await response.json();
-        setData(jsonData.results);
-      } catch (error) {
-        setError("An error occurred while fetching data.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { data, isLoading, error } = useQuery<UserTableInfos[]>({
+    queryKey: ["randomUserData"],
+    queryFn: () =>
+      fetch("https://randomuser.me/api/?results=50")
+        .then((res) => res.json())
+        .then((data) => data.results), // 
+  });
 
   const contextValue: UserInfosContextValue = { isLoading, error, data };
 

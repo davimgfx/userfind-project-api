@@ -10,16 +10,16 @@ const UserInfos = () => {
   const { id: targetUsername } = useParams();
   const userInfosContext = useContext(UserInfosContext);
 
-  if (!userInfosContext) {
+  if (!userInfosContext || !userInfosContext.data) {
     return null;
   }
 
-  const { data: usersList } = userInfosContext;
+  const { data } = userInfosContext;
 
-  const filteredUser = usersList.find(
+  const filteredUser = data.find(
     (obj: UserSimpleData) => obj.login.username === targetUsername
   );
-  console.log(filteredUser);
+  
   return (
     <section id="profile" className="profile">
       <Link to="../">

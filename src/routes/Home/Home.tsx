@@ -9,13 +9,15 @@ const Home = () => {
   const [searchField, setSearchField] = useState("");
   const userInfosContext = useContext(UserInfosContext);
 
-  if (!userInfosContext) {
+  if (!userInfosContext || !userInfosContext.data) {
     return null;
   }
 
-  const { isLoading, data } = userInfosContext;
+  const { isLoading, error, data } = userInfosContext;
 
-  
+  if (error) {
+    alert(`Some error happend ${error.message}`);
+  }
 
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const searchValue = event.target.value.toLowerCase();
@@ -24,9 +26,13 @@ const Home = () => {
 
   const users = data || [];
 
-  const filteredUsers = users.filter((user) =>
-    `${user.name.first} ${user.name.last}`.toLowerCase().includes(searchField)
-  );
+  const filteredUsers = Array.isArray(users)
+    ? users.filter((user) =>
+        `${user.name.first} ${user.name.last}`
+          .toLowerCase()
+          .includes(searchField)
+      )
+    : [];
 
   return (
     <section id="home">
