@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { UserTableInfos } from "../../types/user"
+import { UserTableInfos } from "../../types/user";
 import "./UserMoreInfos.scss";
-
+import { motion } from "framer-motion";
 interface UserInfosAboutProps {
   filteredUser: UserTableInfos;
 }
@@ -22,8 +22,15 @@ const UserInfosAbout: React.FC<UserInfosAboutProps> = ({ filteredUser }) => {
 
   return (
     <main>
-
-      <div className="user-about-options">
+      <motion.div
+        initial={{ scale: 0.8 }}
+        animate={{ rotate: 0, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 180,
+          
+        }}
+        className="user-about-options">
         <h2
           className={`user-about-option ${
             activeTab === "info" ? "activity-option" : ""
@@ -31,6 +38,7 @@ const UserInfosAbout: React.FC<UserInfosAboutProps> = ({ filteredUser }) => {
           onClick={() => handleTabClick("info")}>
           Info
         </h2>
+
         <h2
           className={`user-about-option ${
             activeTab === "location" ? "activity-option" : ""
@@ -45,7 +53,7 @@ const UserInfosAbout: React.FC<UserInfosAboutProps> = ({ filteredUser }) => {
           onClick={() => handleTabClick("login")}>
           Login
         </h2>
-      </div>
+      </motion.div>
       <section className="user-infos">
         {activeTab === "info" && (
           <>
