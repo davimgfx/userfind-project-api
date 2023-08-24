@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState, ChangeEvent } from "react";
 import { Header, UserTable, TableLoading } from "../../components";
 import "./Home.scss";
 import { motion } from "framer-motion";
@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { UserInfosContext } from "../../context/UserInfosContext";
 
 const Home = () => {
+  const [searchField, setSearchField] = useState("");
   const userInfosContext = useContext(UserInfosContext);
 
   if (!userInfosContext) {
@@ -14,9 +15,9 @@ const Home = () => {
 
   const { isLoading, data } = userInfosContext;
 
-  const [searchField, setSearchField] = useState("");
+  
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const searchValue = event.target.value.toLowerCase();
     setSearchField(searchValue);
   };

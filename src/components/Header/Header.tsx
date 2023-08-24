@@ -1,7 +1,12 @@
 import "./Header.scss"
+import  { ChangeEvent } from "react";
 
-const Header = ({ onChangeHandler }) => {
-
+interface HeaderProps {
+  onChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+ 
+const Header: React.FC<HeaderProps> = ({ onChangeHandler }) => {
+  
   return (
     
       <header className="header">

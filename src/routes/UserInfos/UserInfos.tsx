@@ -2,15 +2,22 @@ import { useParams, Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserInfosContext } from "../../context/UserInfosContext";
 import { UserInfosAbout } from "../../components";
+import { UserSimpleData } from "../../types/user";
 
 import "./UserInfos.scss";
+
 const UserInfos = () => {
   const { id: targetUsername } = useParams();
   const userInfosContext = useContext(UserInfosContext);
+  
+  if (!userInfosContext) {
+    return null;
+  }
+
   const { data: usersList } = userInfosContext;
 
   const filteredUser = usersList.find(
-    (obj) => obj.login.username === targetUsername
+    (obj: UserSimpleData) => obj.login.username === targetUsername
   );
 
   return (
@@ -31,7 +38,7 @@ const UserInfos = () => {
         <p className="profile-title">{filteredUser?.name?.title}</p>
       </header>{" "}
       <div className="profile-bar" />
-      <UserInfosAbout filteredUser={filteredUser} />
+      {filteredUser && (<UserInfosAbout filteredUser={filteredUser} />)}
     </section>
   );
 };

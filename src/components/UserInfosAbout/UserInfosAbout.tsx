@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { UserTableInfos } from "../../types/user"
 import "./UserMoreInfos.scss";
 
-const UserInfosAbout = ({ filteredUser }) => {
+interface UserInfosAboutProps {
+  filteredUser: UserTableInfos;
+}
+
+const UserInfosAbout: React.FC<UserInfosAboutProps> = ({ filteredUser }) => {
   const [activeTab, setActiveTab] = useState("info");
   console.log(filteredUser);
   const handleTabClick = (tab: string) => {

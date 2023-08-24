@@ -7,8 +7,7 @@ const TableLoading = () => {
       <motion.div
         initial={{ width: 0 }}
         animate={{ width: "100%" }}
-        transition={{ repeat: Infinity, duration: 1.5,}}
-        className="loading-bar"
+        transition={{ repeat: Infinity, duration: 1.5 }}
       />
     </div>
   );
